@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Local Food Finder Kuching</title>
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  </head>
+  <body data-page="home">
+    <header class="site-header">
+      <a class="logo" href="index.html" aria-label="Local Food Finder home">
+        <span>LF</span>
+        <strong>Local Food Finder KCH</strong>
+      </a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <nav class="site-nav" id="siteNav">
+        <a href="index.html" data-page="home">Home</a>
+        <a href="about.html" data-page="about">About</a>
+        <a href="foods.html" data-page="foods">Find Food</a>
+        <a href="login.html" data-page="login" id="loginLink">Login</a>
+        <a href="register.html" data-page="register" id="registerLink">Register</a>
+        <button class="ghost small hidden" id="logoutBtn">Logout</button>
+      </nav>
+    </header>
+
+    <main class="page active">
+      <div class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Kuching local food guide</p>
+          <h1>Find nearby local food without scrolling forever.</h1>
+          <p>
+            Search restaurants around Kuching, check contact numbers, opening hours, locations,
+            food descriptions, and reviews before you decide where to go.
+          </p>
+          <div class="hero-actions">
+            <a class="primary button-link" href="foods.html">Start finding food</a>
+            <a class="secondary button-link" href="about.html">About Kuching food</a>
+          </div>
+          <form class="home-search" action="foods.html">
+            <label>
+              <span>Search Kuching restaurants</span>
+              <input name="q" type="search" placeholder="Try laksa, cafe, Padungan, India Street..." />
+            </label>
+            <button class="primary" type="submit">Search</button>
+          </form>
+          <div class="hero-stats">
+            <div><strong id="homeRestaurantCount">0</strong><span>restaurants</span></div>
+            <div><strong>Call</strong><span>directly</span></div>
+            <div><strong>Maps</strong><span>directions</span></div>
+          </div>
+        </div>
+        <div class="hero-card">
+          <img
+            src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=1000&q=80"
+            alt="Local food on a plate"
+          />
+          <div>
+            <span>Explore Kuching</span>
+            <strong>Local restaurants</strong>
+            <p>Find the details you need before heading out.</p>
+          </div>
+        </div>
+      </div>
+
+      <section class="section-band">
+        <div class="section-title">
+          <p class="eyebrow">Popular searches</p>
+          <h2>Start with what you feel like eating.</h2>
+        </div>
+        <div class="quick-links">
+          <a href="foods.html?q=laksa">Laksa</a>
+          <a href="foods.html?q=kopi">Kopi</a>
+          <a href="foods.html?q=cafe">Cafe</a>
+          <a href="foods.html?q=dessert">Dessert</a>
+          <a href="foods.html?q=western">Western</a>
+          <a href="foods.html?q=Padungan">Padungan</a>
+          <a href="foods.html?q=India Street">India Street</a>
+          <a href="foods.html?q=Waterfront">Waterfront</a>
+        </div>
+      </section>
+
+      <section class="section-band">
+        <div class="section-title">
+          <p class="eyebrow">Featured places</p>
+          <h2>Good picks to begin with.</h2>
+          <a class="secondary button-link" href="foods.html">View all</a>
+        </div>
+        <div class="featured-grid" id="featuredGrid"></div>
+      </section>
+
+      <section class="section-band">
+        <div class="section-title">
+          <p class="eyebrow">Plan your visit</p>
+          <h2>Useful details before you head out.</h2>
+        </div>
+        <div class="steps-grid">
+          <article>
+            <span>1</span>
+            <h3>Search</h3>
+          <p>Search by restaurant name, description, contact number, or location.</p>
+          </article>
+          <article>
+            <span>2</span>
+            <h3>Choose</h3>
+          <p>View photos, phone numbers, opening hours, locations, and reviews.</p>
+          </article>
+          <article>
+            <span>3</span>
+          <h3>Visit</h3>
+          <p>Call the restaurant directly or open directions in Google Maps.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="shared.js"></script>
+    <script src="navbar.js"></script>
+    <script src="home.js"></script>
+  </body>
+</html>

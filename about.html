@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About | Local Food Finder Kuching</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  </head>
+  <body data-page="about">
+    <header class="site-header">
+      <a class="logo" href="index.html"><span>LF</span><strong>Local Food Finder KCH</strong></a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <nav class="site-nav" id="siteNav">
+        <a href="index.html" data-page="home">Home</a>
+        <a href="about.html" data-page="about">About</a>
+        <a href="foods.html" data-page="foods">Find Food</a>
+        <a href="login.html" data-page="login" id="loginLink">Login</a>
+        <a href="register.html" data-page="register" id="registerLink">Register</a>
+        <button class="ghost small hidden" id="logoutBtn">Logout</button>
+      </nav>
+    </header>
+
+    <main class="page active about-page">
+      <section class="about-hero">
+        <div>
+          <p class="eyebrow">Kuching food culture</p>
+          <h1>A city where breakfast, coffee, noodles, and late-night bites all have a story.</h1>
+          <p>
+            Kuching's food scene is shaped by Sarawakian, Malay, Chinese, Indian, Dayak, Indonesian,
+            Western, and cafe influences. From kopitiam breakfasts to riverside dinners, the city
+            makes eating feel local, casual, and full of variety.
+          </p>
+          <div class="hero-actions">
+            <a class="primary button-link" href="foods.html">Explore food places</a>
+            <a class="secondary button-link" href="foods.html?q=laksa">Find laksa</a>
+          </div>
+        </div>
+        <img
+          src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80"
+          alt="Restaurant table with food"
+        />
+      </section>
+
+      <section class="about-stats">
+        <div><strong>Laksa</strong><span>Sarawak comfort classic</span></div>
+        <div><strong>Kopi</strong><span>kopitiam breakfast culture</span></div>
+        <div><strong>Kek Lapis</strong><span>colourful local cake</span></div>
+        <div><strong>Seafood</strong><span>fresh local favourites</span></div>
+      </section>
+
+      <section class="section-band">
+        <div class="section-title">
+          <p class="eyebrow">What to expect</p>
+          <h2>Different streets, different cravings.</h2>
+        </div>
+        <div class="about-grid">
+          <article>
+            <span>01</span>
+            <h3>Morning kopitiams</h3>
+            <p>Start with local kopi, toast, soft-boiled eggs, mee kolok, or Sarawak laksa.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Casual lunch spots</h3>
+            <p>Find rice plates, noodles, nasi lemak, Indian Muslim food, Thai dishes, and cafe meals.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Night food and hangouts</h3>
+            <p>Explore bistros, grills, desserts, bars, street food, and late-night comfort food.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="owner-panel">
+        <div>
+          <p class="eyebrow">Local areas</p>
+          <h2>Food is spread across Kuching's familiar streets.</h2>
+          <p>
+            Padungan, India Street, Main Bazaar, Green Hill, Ban Hock, Satok, and the Waterfront
+            each have their own mix of cafes, kopitiams, restaurants, bakeries, and late-night spots.
+          </p>
+        </div>
+        <a class="primary button-link" href="foods.html">Browse restaurants</a>
+      </section>
+    </main>
+
+    <script src="shared.js"></script>
+    <script src="navbar.js"></script>
+    <script src="about.js"></script>
+  </body>
+</html>

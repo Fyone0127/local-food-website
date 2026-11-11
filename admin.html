@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin | Local Food Finder Kuching</title>
+    <link rel="stylesheet" href="styles.css?v=photo-upload-3" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  </head>
+
+  <body data-page="admin">
+    <header class="site-header">
+      <a class="logo" href="index.html">
+        <span>LF</span>
+        <strong>Local Food Finder KCH</strong>
+      </a>
+
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="site-nav" id="siteNav">
+        <a href="index.html" data-page="home">Home</a>
+        <a href="about.html" data-page="about">About</a>
+        <a href="foods.html" data-page="foods">Find Food</a>
+        <a href="login.html" data-page="login" id="loginLink">Login</a>
+        <a href="register.html" data-page="register" id="registerLink">Register</a>
+        <button class="ghost small hidden" id="logoutBtn" type="button">Logout</button>
+      </nav>
+    </header>
+
+    <main class="page active admin-page">
+      <section class="admin-top">
+        <div>
+          <p class="eyebrow">Admin area</p>
+          <h1>Manage restaurant data</h1>
+          <p class="admin-subtitle">
+            Add, edit, delete, and update Kuching restaurant details.
+          </p>
+        </div>
+
+        <div class="admin-status" id="adminStatus">Restaurant database</div>
+      </section>
+
+      <section class="admin-guard" id="adminGuard">
+        <div>
+          <p class="eyebrow" id="adminGuardLabel">Restricted access</p>
+          <h2 id="adminGuardTitle">Admin login required</h2>
+          <p id="adminGuardText">Login with the admin account first to edit restaurant data.</p>
+        </div>
+
+        <a class="primary button-link" href="login.html">Go to login</a>
+      </section>
+
+      <section class="admin-workspace hidden" id="adminWorkspace">
+        <form class="admin-form" id="restaurantForm">
+          <div class="form-heading">
+            <p class="eyebrow">Restaurant form</p>
+            <h2 id="formTitle">Add new restaurant</h2>
+            <p>Fill in the restaurant details below, then save it to the database.</p>
+          </div>
+
+          <input type="hidden" id="restaurantId" />
+
+          <label>
+            <span>Restaurant Name</span>
+            <input
+              id="restaurantName"
+              type="text"
+              placeholder="Example: 8 Minit Kopi"
+              required
+            />
+          </label>
+
+          <label>
+            <span>Phone Number</span>
+            <input
+              id="restaurantPhone"
+              type="text"
+              placeholder="Example: 082-123456"
+            />
+          </label>
+
+          <label class="wide">
+            <span>Description</span>
+            <input
+              id="restaurantDescription"
+              type="text"
+              placeholder="Example: Cafe with local kopi, toast, and desserts"
+              required
+            />
+          </label>
+
+          <label>
+            <span>Location</span>
+            <input
+              id="restaurantLocation"
+              type="text"
+              placeholder="Example: India Street, Kuching"
+              required
+            />
+          </label>
+
+          <label>
+            <span>Operation Hour</span>
+            <input
+              id="restaurantHours"
+              type="text"
+              placeholder="Example: Daily 8am-8pm"
+              required
+            />
+          </label>
+
+          <label>
+            <span>Review</span>
+            <input
+              id="restaurantReview"
+              type="text"
+              placeholder="Example: 4.5 star"
+              required
+            />
+          </label>
+
+          <input type="hidden" id="restaurantPhoto" />
+
+          <div class="photo-upload-field wide">
+            <span>Restaurant photo</span>
+            <label class="photo-picker" for="restaurantPhotoFile">
+              <input id="restaurantPhotoFile" type="file" accept="image/*" />
+              <strong>Choose photo</strong>
+              <small id="photoFileName">JPG, PNG, or WEBP</small>
+            </label>
+          </div>
+
+          <div class="photo-upload-preview wide empty" id="photoUploadPreview">
+            <img id="restaurantPhotoPreview" alt="Restaurant photo preview" />
+            <span id="photoUploadText">No photo selected</span>
+          </div>
+
+          <button class="secondary wide" id="uploadFormPhotoBtn" type="button">
+            Upload selected photo
+          </button>
+
+          <div class="form-actions">
+            <button class="primary" id="saveRestaurantBtn" type="submit">Save restaurant</button>
+            <button class="secondary" id="resetFormBtn" type="button">Clear form</button>
+          </div>
+
+          <p class="form-message wide" id="adminFormMessage"></p>
+        </form>
+
+        <div class="admin-table-card">
+          <div class="table-card-head">
+            <div>
+              <span>Database table</span>
+              <strong>restaurants</strong>
+            </div>
+
+            <div class="row-actions">
+              <a class="secondary button-link" href="foods.html">Preview site</a>
+              <button class="secondary refresh-btn" id="seedBtn" type="button">
+                <span class="refresh-icon">↻</span>
+                <span class="refresh-text">Refresh list</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="admin-table-tools">
+            <label class="admin-search">
+              <span>Search restaurants</span>
+              <input
+                id="adminSearchInput"
+                type="search"
+                placeholder="Search name, phone, location, hours, review..."
+              />
+            </label>
+
+            <button class="secondary" id="clearAdminSearchBtn" type="button">Clear</button>
+          </div>
+
+          <p class="admin-count-line" id="adminCountText">Showing all restaurants</p>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Restaurant</th>
+                  <th>Photo</th>
+                  <th>Number</th>
+                  <th>Location</th>
+                  <th>Hours</th>
+                  <th>Review</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+
+              <tbody id="adminRows"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="shared.js?v=photo-upload-3"></script>
+    <script src="navbar.js?v=photo-upload-3"></script>
+    <script src="admin.js?v=photo-upload-3"></script>
+  </body>
+</html>
