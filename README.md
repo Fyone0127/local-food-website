@@ -1,6 +1,8 @@
 # Local Food Finder KCH
 
-Local Food Finder KCH is a public restaurant directory for Kuching.
+Local Food Finder KCH is a restaurant directory for Kuching. Browse by stall name, food type, mood, or rating, then call a restaurant or get directions. Mark visited restaurants to earn Foodie Points in your browser.
+
+The site uses HTML, CSS, and JavaScript. Supabase provides the restaurant database, account sign-in, and photo storage.
 
 ## Pages
 
@@ -25,7 +27,7 @@ http://127.0.0.1:4173/index.html
 
 ## Supabase Database
 
-Run `database.sql` in Supabase SQL Editor.
+Run [database.sql](database.sql) in Supabase SQL Editor for a new project. For an existing project, use [supabase-csv-migration.sql](supabase-csv-migration.sql) to add the CSV fields or [supabase-profiles-trigger.sql](supabase-profiles-trigger.sql) to create profiles for Auth users.
 
 The main table is `restaurants`.
 
@@ -72,7 +74,7 @@ PowerShell:
 ```powershell
 $env:SUPABASE_URL="https://your-project-id.supabase.co"
 $env:SUPABASE_SERVICE_ROLE_KEY="your-service-role-key"
-$env:CSV_FILE="C:\Users\Fyone\Downloads\Local Food Finder.csv"
+$env:CSV_FILE="C:\path\to\Local Food Finder.csv"
 npm run sync
 ```
 
@@ -89,16 +91,13 @@ npm run sync
 
 ## How The Import Works
 
-Each CSV row becomes one row in Supabase.
-
-When you run:
-
-```powershell
-npm run sync
-```
-
-the old imported rows are refreshed with the latest CSV or Google Sheet data. Existing matching `photo_url` values are kept, so restaurant photos do not disappear when the text data is refreshed.
+The sync deduplicates the input, deletes all current restaurant rows, and inserts the new list. Back up the table before importing. If insertion fails after deletion, restore from the backup or rerun the import after fixing the error. The importer carries over photo URLs for matching restaurant names and phone numbers when the input has no photo URL.
 
 ## Photos
 
-Real shop photos can be added with a `photo_url` column in the CSV, or kept in Supabase after the first import.
+1. Run [supabase-storage-photos.sql](supabase-storage-photos.sql) to create the `restaurant-photos` bucket.
+2. Create the admin account configured in [auth.js](auth.js) in Supabase Authentication and sign in with its Supabase password.
+3. In [admin.html](admin.html), choose a restaurant, click **Edit**, select a picture, and click **Upload selected photo**.
+4. Check the restaurant row in Supabase for the saved `photo_url`. CSV imports also accept a `photo_url` column.
+
+Before deploying publicly, restrict restaurant and Storage writes to authorized admins. The relaxed policy script grants write access to anonymous visitors.
